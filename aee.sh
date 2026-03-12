@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/bashp
 python3 binary.py

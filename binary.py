@@ -1,30 +1,31 @@
 import sys
 
-def exponenciacion_binaria(base, exponente, modulo):
-    resultado = 1
-    base = base % modulo
+def inverso_modular(a, m):
+    t, nuevo_t = 0, 1
+    r, nuevo_r = m, a
 
-    while exponente > 0:
-        if exponente % 2 == 1:
-            resultado = (resultado * base) % modulo
-        
-        exponente = exponente // 2
-        base = (base * base) % modulo
+    while nuevo_r != 0:
+        cociente = r // nuevo_r
+        t, nuevo_t = nuevo_t, t - cociente * nuevo_t
+        r, nuevo_r = nuevo_r, r - cociente * nuevo_r
 
-    return resultado
+    if r > 1:
+        return -1
+
+    if t < 0:
+        t = t + m
+
+    return t
 
 
 def main():
-    # Leer toda la entrada que manda el autograder
     datos = sys.stdin.read().split()
 
-    base = int(datos[0])
-    exponente = int(datos[1])
-    modulo = int(datos[2])
+    a = int(datos[0])
+    m = int(datos[1])
 
-    resultado = exponenciacion_binaria(base, exponente, modulo)
+    resultado = inverso_modular(a, m)
 
-    # El autograder solo espera el número
     print(resultado)
 
 
